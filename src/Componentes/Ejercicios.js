@@ -1,12 +1,12 @@
-const Ejercicios = ({ cantidadEjercicios }) => {
+const Ejercicios = ({ cantidadEjercicios, colors }) => {
     const camposTexto = new Array(cantidadEjercicios).fill(""); 
     return (
         
         <div>
             <div className="flex justify-around">
-                <label htmlFor="ejercicio">Exercise:</label>
-                <label htmlFor="rpe">RPE:</label>
-                <label htmlFor="sets">Sets:</label>
+                <label className={`${colors}`}  htmlFor="ejercicio">Exercise:</label>
+                <label className={`${colors}`} htmlFor="rpe">RPE:</label>
+                <label className={`${colors}`} htmlFor="sets">Sets:</label>
             </div>
             {camposTexto.map((_, index) => (
                 <div key={index} className="mb-2 flex">
