@@ -1,8 +1,14 @@
 import { FaPlus, FaMinus } from "react-icons/fa";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { IoColorPalette } from "react-icons/io5";
 import Color from "./Color";
 import Ejercicios from "./Ejercicios";
+import { RiExpandDiagonalFill } from "react-icons/ri";
+import { GrContract } from "react-icons/gr";
+import { useOutsideClick } from "../hooks/UseOutsideClick";
+
+const NewClassName =
+  " min-w-full min-h-full w-auto h-auto z-50 col-span-4 border p-4 rounded-lg shadow-md grid grid-rows-[auto,auto,1fr,auto]";
 
 const colors = {
   azul: {
@@ -61,70 +67,97 @@ const colors = {
   },
 };
 
-const Marco = ({ nombreRutina, ejercicios }) => {
-    const cantidadEjercicios = parseInt(ejercicios) || 0; 
-    const camposTexto = new Array(cantidadEjercicios).fill("");
-
-    const [isAdd, setIsAdd] = useState(true);
+const Marco = ({ nombreRutina, ejercicios, eliminarMarco, id , modifyMarco, setModifyMarco}) => {
+  const cantidadEjercicios = parseInt(ejercicios) || 0;
+  const camposTexto = new Array(cantidadEjercicios).fill("");
 
 
-    const toggleIcon = () => {
-      setIsAdd(!isAdd);
-    };
+  const [isAdd, setIsAdd] = useState(true);
 
-    const [showModal, setShowModal] = useState(false);
-    const [backgroundColor, setBackgroundColor] = useState("#FFFFFF");
-    const [textColor, setTextColor] = useState("#000000");
-    const [iconColor, setIconColor] = useState(null);
+  const toggleIcon = () => {
+    setIsAdd(!isAdd);
+  };
 
-    const closeModal = () => setShowModal(false);
+  const [showModal, setShowModal] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState("#FFFFFF");
+  const [textColor, setTextColor] = useState("#000000");
+  const [iconColor, setIconColor] = useState(null);
 
-    const cambiarColor = (fondo, texto, icon) => {
-      setBackgroundColor(fondo);
-      setTextColor(texto);
-      setIconColor(icon);
-      closeModal();
-    };
-    
+ 
 
+  const containerRef = useRef(null);
+  useOutsideClick(containerRef, () => setModifyMarco(false));
 
-    return (
-      <div
-        className="border p-4 rounded-lg shadow-md"
-        style={{ backgroundColor: backgroundColor }}
-      >
-        <header className="flex w-full justify-between">
-          <button onClick={toggleIcon} className="text-4xl">
-            {isAdd ? (
-              <FaMinus color={iconColor} size={25} />
-            ) : (
-              <FaPlus color={iconColor} size={25} />
-            )}
-          </button>
+  const closeModal = () => setShowModal(false);
+
+  const cambiarColor = (colorName) => {
+    const colorObj = colors[colorName];
+    setBackgroundColor(colorObj.color);
+    setTextColor(colorObj.text);
+    setIconColor(colorObj.icon);
+    closeModal();
+  };
+
+  const ChangeMarco = () => {
+    setModifyMarco(!modifyMarco);
+  };
+
+  return (
+    <div
+      className={
+        modifyMarco
+          ? NewClassName
+          : "min-w-[300px] min-h-[300px] border p-4 rounded-lg shadow-md grid grid-rows-[auto,auto,1fr,auto]"
+      }
+      style={{ backgroundColor: backgroundColor }}
+    >
+      <header className="flex w-full justify-between">
+        <button onClick={toggleIcon} className="text-4xl">
+          {isAdd ? (
+            <FaMinus color={iconColor} size={25} />
+          ) : (
+            <FaPlus color={iconColor} size={25} />
+          )}
+        </button>
+        <div className="flex gap-4">
           <button onClick={() => setShowModal(true)}>
             <IoColorPalette color={iconColor} size={25} />
           </button>
-        </header>
-        <div className="flex justify-center">
-          <h2 className={`text-xl font-bold ${textColor}`}>{nombreRutina}</h2>
+          <button onClick={() => ChangeMarco()}>
+            {modifyMarco ? (
+              <GrContract color={iconColor} size={25} />
+            ) : (
+              <RiExpandDiagonalFill color={iconColor} size={25} />
+            )}
+          </button>
         </div>
-        <div className="mt-4">
-          {isAdd && (
-            <Ejercicios
-              colors={textColor}
-              cantidadEjercicios={cantidadEjercicios}
-            />
-          )}
-        </div>
-        {showModal && (
-          <Color
-            colores={colors}
-            cambiarColor={cambiarColor}
-            closeModal={closeModal}
+      </header>
+      <div className="flex justify-center">
+        <h2 className={`text-xl ${textColor}`}>{nombreRutina}</h2>
+      </div>
+      <div className="mt-4">
+        {isAdd && (
+          <Ejercicios
+            colors={textColor}
+            cantidadEjercicios={cantidadEjercicios}
           />
         )}
       </div>
-    );
+      {showModal && (
+        <Color
+          colores={colors}
+          cambiarColor={cambiarColor}
+          closeModal={closeModal}
+        />
+      )}
+      <div className="mt-auto flex justify-around ">
+        <button className={`${textColor}`}>Save</button>
+        <button onClick={() => eliminarMarco(id)} className={`${textColor}`}>
+          Delete
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default Marco;

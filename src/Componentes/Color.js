@@ -9,7 +9,7 @@ const Color = ({ colores, cambiarColor, closeModal }) => {
                 key={index}
                 style={{ backgroundColor: colorObj.color }}
                 className="w-12 h-12 rounded-full border-2 border-gray-300"
-                onClick={() => cambiarColor(colorObj.color, colorObj.text, colorObj.icon)}
+                onClick={() => cambiarColor(colorName)}
               />
             ))}
           </div>
