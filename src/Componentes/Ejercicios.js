@@ -1,27 +1,62 @@
-const Ejercicios = ({ cantidadEjercicios, colors }) => {
-    const camposTexto = new Array(cantidadEjercicios).fill(""); 
-    return (
-        
-        <div>
-            <div className="flex justify-around">
-                <label className={`${colors}`}  htmlFor="ejercicio">Exercise:</label>
-                <label className={`${colors}`} htmlFor="rpe">RPE:</label>
-                <label className={`${colors}`} htmlFor="sets">Sets:</label>
-            </div>
-            {camposTexto.map((_, index) => (
-                <div key={index} className="mb-2 flex">
-                    <textarea 
-                        placeholder={`Ejercicio ${index + 1}`} 
-                        id="ejercicio"
-                        className="w-full p-2 border rounded-lg"
-                    />
-  
-                    <textarea id="rpe" inputMode="numeric" className="w-full p-2 border rounded-lg" />
-                    <textarea id="sets" inputMode="numeric" className="w-full p-2 border rounded-lg" />
-                </div>
-        ))}
-    </div>
-    )
-}
+import Repeticiones from "./Repeticiones";
+import { useState } from "react";
+import { FaPlus, FaMinus } from "react-icons/fa";
 
-export default Ejercicios
+const Ejercicios = ({ cantidadEjercicios, colors }) => {
+  const [sets, setSets] = useState(Array(cantidadEjercicios).fill(0));
+  const [visible, setVisible] = useState(Array(cantidadEjercicios).fill(false));
+
+  const handleSetsChange = (event, index) => {
+    const newSets = [...sets];
+    newSets[index] = parseInt(event.target.value) || 0;
+    setSets(newSets);
+  };
+
+  const handleSetVisible = (index) => {
+    const newVisible = [...visible];
+    newVisible[index] = !newVisible[index]; // Alternar visibilidad para este ejercicio
+    setVisible(newVisible);
+  };
+
+  return (
+    <div>
+      {Array(cantidadEjercicios).fill("").map((_, index) => (
+        <div key={index} className="mb-4 flex flex-col items-center">
+          <div className="flex items-center justify-center mb-2 gap-2">
+            {visible[index] ? (
+              <FaMinus
+                onClick={() => handleSetVisible(index)}
+                className="cursor-pointer"
+              />
+            ) : (
+              <FaPlus
+                onClick={() => handleSetVisible(index)}
+                className="cursor-pointer"
+              />
+            )}
+            <textarea
+              className={`${colors} p-2 border rounded text-center`}
+              placeholder="Exercise:"
+            ></textarea>
+            <input
+              min={0}
+              max={20}
+              value={sets[index]}
+              type="number"
+              placeholder="Sets"
+              onChange={(event) => handleSetsChange(event, index)}
+              className="p-2 border rounded text-center"
+            />
+          </div>
+          {sets[index] > 0 && visible[index] && (
+            <div className="flex flex-col w-full items-center">
+              <Repeticiones colors={colors} sets={sets[index]} />
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Ejercicios;

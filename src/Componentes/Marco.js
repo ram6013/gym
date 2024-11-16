@@ -138,7 +138,7 @@ const Marco = ({ nombreRutina, ejercicios, eliminarMarco, id , modifyMarco, setM
       <div className="mt-4">
         {isAdd && (
           <Ejercicios
-            colors={textColor}
+            colors={colors}
             cantidadEjercicios={cantidadEjercicios}
           />
         )}
