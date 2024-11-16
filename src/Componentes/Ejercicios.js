@@ -14,7 +14,7 @@ const Ejercicios = ({ cantidadEjercicios, colors }) => {
 
   const handleSetVisible = (index) => {
     const newVisible = [...visible];
-    newVisible[index] = !newVisible[index]; // Alternar visibilidad para este ejercicio
+    newVisible[index] = !newVisible[index]; 
     setVisible(newVisible);
   };
 
@@ -48,7 +48,7 @@ const Ejercicios = ({ cantidadEjercicios, colors }) => {
               className="p-2 border rounded text-center"
             />
           </div>
-          {sets[index] > 0 && visible[index] && (
+          {(sets[index] > 0 && visible[index]) && (
             <div className="flex flex-col w-full items-center">
               <Repeticiones colors={colors} sets={sets[index]} />
             </div>

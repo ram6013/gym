@@ -8,7 +8,7 @@ import { GrContract } from "react-icons/gr";
 import { useOutsideClick } from "../hooks/UseOutsideClick";
 
 const NewClassName =
-  " min-w-full min-h-full w-auto h-auto z-50 col-span-4 border p-4 rounded-lg shadow-md grid grid-rows-[auto,auto,1fr,auto]";
+  "fixed inset-0 z-50 col-span-4 border p-4 rounded-lg shadow-md grid grid-rows-[auto,auto,1fr,auto]";
 
 const colors = {
   azul: {
