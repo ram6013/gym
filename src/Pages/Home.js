@@ -32,12 +32,12 @@ const Home = () => {
       <Header />
       <div className="flex flex-col items-center mt-6">
         <div className="flex flex-row w-full">
-          <div className="flex justify-start ml-4">
+          <div className="flex justify-start ml-4 z-0">
             <button className="z-30" onClick={agregarMarco}>
               <IoAddCircleSharp size={32} />
             </button>
           </div>
-          <div className="flex absolute w-full justify-center items-center">
+          <div className="flex absolute w-full justify-center items-center pointer-events-none">
             <h1 className="text-4xl text-center font-bold">Workouts:</h1>
           </div>
         </div>
@@ -57,24 +57,24 @@ const Home = () => {
           </div>
         ) : (
           <ReactSortable
-          list={marcos}
-          setList={setMarcos}
-          className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 m-9"
-        >
-          {marcos.map((marco, index) => (
-            <Marco
-              key={index}
-              nombreRutina={marco.nombreRutina}
-              ejercicios={marco.ejercicios}
-              eliminarMarco={eliminarMarco}
-              id={marco.id}
-              setModifyMarco={setModifyMarco}
-              modifyMarco={modifyMarco}
-            />
-          ))}
-        </ReactSortable>
-      )}
-        </div>
+            list={marcos}
+            setList={setMarcos}
+            className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 m-9"
+          >
+            {marcos.map((marco, index) => (
+              <Marco
+                key={marco.id}
+                nombreRutina={marco.nombreRutina}
+                ejercicios={marco.ejercicios}
+                eliminarMarco={eliminarMarco}
+                id={marco.id}
+                setModifyMarco={setModifyMarco}
+                modifyMarco={modifyMarco}
+              />
+            ))}
+          </ReactSortable>
+        )}
+      </div>
     </div>
   );
 };
