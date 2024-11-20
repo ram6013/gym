@@ -1,8 +1,8 @@
 import Header from "../Componentes/header";
 import { IoAddCircleSharp } from "react-icons/io5";
 import { useState } from "react";
-import Marco from "../Componentes/Marco";
-import CreacionPopUp from "../Componentes/CreacionPopUp";
+import Marco from "../Componentes/Marco/Marco";
+import CreateMarco from "../Componentes/CreateMarco";
 import { ReactSortable } from "react-sortablejs";
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -41,12 +41,14 @@ const Home = () => {
             </button>
           </div>
           <div className="flex absolute w-full justify-center items-center pointer-events-none">
-            <h1 className="text-4xl text-white text-center font-bold">Workouts:</h1>
+            <h1 className="text-4xl text-white text-center font-bold">
+              Workouts:
+            </h1>
           </div>
         </div>
 
         {showPopup && (
-          <CreacionPopUp
+          <CreateMarco
             setShowPopup={setShowPopup}
             agregarRutina={handleFormSubmit}
           />
@@ -63,7 +65,7 @@ const Home = () => {
             list={marcos}
             setList={setMarcos}
             className="flex flex-wrap gap-6 m-9"
-            >
+          >
             {marcos.map((marco, index) => (
               <Marco
                 key={marco.id}

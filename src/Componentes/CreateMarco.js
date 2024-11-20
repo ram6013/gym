@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useOutsideClick } from "../hooks/UseOutsideClick";
 import toast, { Toaster } from 'react-hot-toast';
-const CreacionPopUp = ({ setShowPopup, agregarRutina }) => {
+const CreateMarco = ({ setShowPopup, agregarRutina }) => {
   const [nombreRutina, setNombreRutina] = useState("");
   const [ejercicios, setEjercicios] = useState("");
   const handleFormSubmit = (e) => {
@@ -72,4 +72,4 @@ const CreacionPopUp = ({ setShowPopup, agregarRutina }) => {
   );
 };
 
-export default CreacionPopUp;
+export default CreateMarco;

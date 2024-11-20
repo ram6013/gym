@@ -5,7 +5,7 @@ import Color from "./Color";
 import Ejercicios from "./Ejercicios";
 import { RiExpandDiagonalFill } from "react-icons/ri";
 import { GrContract } from "react-icons/gr";
-import { useOutsideClick } from "../hooks/UseOutsideClick";
+import { useOutsideClick } from "../../hooks/UseOutsideClick";
 
 const NewClassName =
   "fixed inset-0 z-50 col-span-4 border p-4 rounded-lg shadow-md grid grid-rows-[auto,auto,1fr,auto] ";
