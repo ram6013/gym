@@ -8,7 +8,7 @@ import { GrContract } from "react-icons/gr";
 import { useOutsideClick } from "../hooks/UseOutsideClick";
 
 const NewClassName =
-  "fixed inset-0 z-50 col-span-4 border p-4 rounded-lg shadow-md grid grid-rows-[auto,auto,1fr,auto]";
+  "fixed inset-0 z-50 col-span-4 border p-4 rounded-lg shadow-md grid grid-rows-[auto,auto,1fr,auto] ";
 
 const colors = {
   azul: {
@@ -18,14 +18,15 @@ const colors = {
     icon: "white",
   },
   verde: {
-    className: "bg-green-500 text-white",
-    color: "#00FF00",
+    className: "border-4 border-custom-darkgreen",
+    color: "rgb(128, 237, 153)",
     text: "text-black font-bold",
     icon: "black",
+    icon2: "white",
   },
-  rojo: {
-    className: "bg-red-500 text-white",
-    color: "#FF0000",
+  verde1: {
+    className: "border-4 border-custom-darkgreen",
+    color: "rgb(8, 28, 21)",
     text: "text-white font-bold",
     icon: "white",
   },
@@ -81,7 +82,7 @@ const Marco = ({
   const [isAdd, setIsAdd] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
-  const objectRef = useRef(colors.blanco); 
+  const objectRef = useRef(colors.blanco);
   const containerRef = useRef(null);
 
   const [color, setColor] = useState(colors.blanco);
@@ -108,7 +109,7 @@ const Marco = ({
       className={
         modifyMarco
           ? NewClassName
-          : "h-fit  min-w-[300px] min-h-[300px] border p-4 rounded-lg shadow-md grid grid-rows-[auto,auto,1fr,auto]"
+          : `h-fit  min-w-[300px] min-h-[300px] border p-4 rounded-lg shadow-md grid grid-rows-[auto,auto,1fr,auto] hover:scale-110 transition-all duration-300 ease-in-out ${color.className}`
       }
       style={{ backgroundColor: color.color }}
     >
@@ -136,6 +137,7 @@ const Marco = ({
           </button>
         </div>
       </header>
+      <hr className="mt-3"></hr>
 
       <div className="mt-4">
         {isAdd && (
@@ -149,6 +151,7 @@ const Marco = ({
           closeModal={closeModal}
         />
       )}
+      <hr className="w-full mb-3"></hr>
       <div className="mt-auto flex justify-around ">
         <button className={`${color.text}`}>Save</button>
         <button onClick={() => eliminarMarco(id)} className={`${color.text}`}>

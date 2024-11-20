@@ -1,20 +1,30 @@
 import Repeticiones from "./Repeticiones";
 import { useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import { toast } from "react-hot-toast";
 
 const Ejercicios = ({ cantidadEjercicios, colors }) => {
   const [sets, setSets] = useState(Array(cantidadEjercicios).fill(0));
   const [visible, setVisible] = useState(Array(cantidadEjercicios).fill(true));
 
   const handleSetsChange = (event, index) => {
+    let value = parseInt(event.target.value, 10);
+    if (value > 15) {
+      toast.error("The number cant be more than 15.", { duration: 3000 });
+
+      value = 0;
+    } else if (value < 0) {
+      toast.error("The number cant be less than 0.", { duration: 3000 });
+      value = 0;
+    }
     const newSets = [...sets];
-    newSets[index] = parseInt(event.target.value) || 0;
+    newSets[index] = value;
     setSets(newSets);
   };
 
   const handleSetVisible = (index) => {
     const newVisible = [...visible];
-    newVisible[index] = !newVisible[index]; 
+    newVisible[index] = !newVisible[index];
     setVisible(newVisible);
   };
 
@@ -27,24 +37,24 @@ const Ejercicios = ({ cantidadEjercicios, colors }) => {
             <div className="flex items-center justify-center mb-2 gap-2">
               {visible[index] ? (
                 <FaMinus
-                  color={colors.icon}
+                  color={colors.icon2}
                   onClick={() => handleSetVisible(index)}
                   className={`cursor-pointer`}
                 />
               ) : (
                 <FaPlus
-                  color={colors.icon}
+                  color={colors.icon2}
                   onClick={() => handleSetVisible(index)}
                   className={`cursor-pointer`}
                 />
               )}
-              <textarea 
+              <textarea
                 className={`${colors} p-2 border rounded-xl border-gray-300 text-center resize-none`}
                 placeholder="Exercise:"
               ></textarea>
               <input
                 min={0}
-                max={20}
+                max={15}
                 value={sets[index] || ""}
                 type="number"
                 placeholder="Sets"

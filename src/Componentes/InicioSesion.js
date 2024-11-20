@@ -1,11 +1,16 @@
 import React from "react";
 import { useOutsideClick } from "../hooks/UseOutsideClick";
+import { useNavigate } from "react-router-dom";
 
 const InicioSesion = ({ setShowModal }) => {
+
   const ref = React.useRef(null);
   useOutsideClick(ref, () => {
     setShowModal(false);
   });
+
+  const navigate = useNavigate();
+
   return (
     <div
       ref={ref}
@@ -17,7 +22,7 @@ const InicioSesion = ({ setShowModal }) => {
     >
       <ul className="py-2">
         <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-          <button>Iniciar Sesión</button>
+          <button onClick={() => navigate("/login")}>Iniciar Sesión</button>
         </li>
         <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
           <button>Crear Cuenta</button>

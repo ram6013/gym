@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useOutsideClick } from "../hooks/UseOutsideClick";
+import toast, { Toaster } from 'react-hot-toast';
 const CreacionPopUp = ({ setShowPopup, agregarRutina }) => {
   const [nombreRutina, setNombreRutina] = useState("");
   const [ejercicios, setEjercicios] = useState("");
@@ -10,10 +11,10 @@ const CreacionPopUp = ({ setShowPopup, agregarRutina }) => {
       agregarRutina(nombreRutina, ejercicios);
       setShowPopup(false);
     } else {
-      alert(
+      toast.error(
         "Por favor, ingrese el nombre de la rutina y el número de ejercicios."
-      );
-    }
+      , {duration: 3000});
+    } 
   };
 
   const containerRef = useRef(null);
@@ -42,7 +43,7 @@ const CreacionPopUp = ({ setShowPopup, agregarRutina }) => {
             <input
               type="number"
               id="ejercicios"
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               value={ejercicios}
               onChange={(e) => setEjercicios(e.target.value)}
               min={1}
@@ -52,20 +53,21 @@ const CreacionPopUp = ({ setShowPopup, agregarRutina }) => {
           <div className="flex justify-end">
             <button
               type="submit"
-              className="bg-blue-500 text-white p-2 rounded"
+              className="bg-blue-700 text-white p-2 rounded hover:bg-blue-800"
             >
               Push
             </button>
             <button
               type="button"
               onClick={() => setShowPopup(false)}
-              className="ml-2 bg-red-700 text-white p-2 rounded"
+              className="ml-2 bg-red-700 text-white p-2 rounded hover:bg-red-800"
             >
               Cancel
             </button>
           </div>
         </form>
       </div>
+      <Toaster limit={1}/>
     </div>
   );
 };

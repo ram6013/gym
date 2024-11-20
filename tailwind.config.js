@@ -1,13 +1,14 @@
-// tailwind.config.js
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}", // Para detectar todos los archivos de React
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
       colors: {
         "custom-blue": "rgb(19, 41, 61)",
-        "custom-gray": "rgb(42, 98, 143)",
+        "custom-blue2": "rgb(42, 98, 143)",
+        "custom-green": "rgb(128, 237, 153)",
+        'custom-darkgreen': 'rgb(27, 67, 50)'
       },
     },
   },

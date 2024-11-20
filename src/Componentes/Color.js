@@ -1,6 +1,12 @@
-const Color = ({ colores, cambiarColor, closeModal }) => {
+import React from 'react'
+import { useOutsideClick } from "../hooks/UseOutsideClick";
+const Color = ({ colores, cambiarColor, closeModal }) => {  const ref = React.useRef(null);
+  useOutsideClick(ref, () => {
+    closeModal(false);
+  });
+
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div ref={ref} className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
         <div className="bg-white p-6 rounded-lg w-96">
           <h2 className="text-2xl font-semibold mb-4">Elige un color</h2>
           <div className="grid grid-cols-3 gap-4 justify-items-center items-center">
@@ -12,7 +18,7 @@ const Color = ({ colores, cambiarColor, closeModal }) => {
                 onClick={() => {
                   console.log(colorObj);
                   cambiarColor(colorObj);
-                }}
+                }}colorborder
               />
             ))}
           </div>

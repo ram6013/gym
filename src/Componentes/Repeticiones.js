@@ -3,8 +3,9 @@ const Repeticiones = ({ colors, sets }) => {
 
 
   const communClassname = {
-    textarea: "flex-1 p-2 border rounded resize-none scrollbar-hide",
-  }
+    input:
+      "flex-1 p-2 border rounded resize-none scrollbar-hide [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
+  };
 
   return (
     <div
@@ -13,22 +14,24 @@ const Repeticiones = ({ colors, sets }) => {
     >
       {set.map((_, index) => (
         <div key={index} className="flex w-full gap-4 justify-between">
-          <textarea
-            className={communClassname.textarea}
+          <input
+            type="number"
+            className={communClassname.input}
             placeholder="Weight"
             style={{ maxHeight: "30px", maxWidth: "90px" }}
-          ></textarea>
-          <textarea
-            className={communClassname.textarea}
-
+          ></input>
+          <input
+            type="number"
+            className={communClassname.input}
             placeholder="RPE"
             style={{ maxHeight: "30px", maxWidth: "90px" }}
-          ></textarea>
-          <textarea
-            className={communClassname.textarea}
+          ></input>
+          <input
+            type="number"
+            className={communClassname.input}
             placeholder="RP"
             style={{ maxHeight: "30px", maxWidth: "90px" }}
-          ></textarea>
+          ></input>
         </div>
       ))}
     </div>
