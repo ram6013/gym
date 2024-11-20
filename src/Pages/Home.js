@@ -28,7 +28,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className="bg-custom-gray min-h-screen h-auto">
       <Header />
       <div className="flex flex-col items-center mt-6">
         <div className="flex flex-row w-full">
@@ -59,8 +59,8 @@ const Home = () => {
           <ReactSortable
             list={marcos}
             setList={setMarcos}
-            className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 m-9"
-          >
+            className="flex flex-wrap gap-6 m-9"
+            >
             {marcos.map((marco, index) => (
               <Marco
                 key={marco.id}

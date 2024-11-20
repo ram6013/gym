@@ -9,7 +9,7 @@ const Header = () => {
     const [showModal, setShowModal] = useState(false);
 
     return (
-        <div className=' relative flex w-auto h-auto bg-black items-center justify-between'>
+        <div className=' relative flex w-auto h-auto bg-custom-blue 61 items-center justify-between'>
             <button onClick={()=> setShowModal(!showModal)} className='p-4 z-30'><FaUser size={30} color='white' /></button>
             <div className='flex absolute w-full justify-center'>
                 <h1 className='text-6xl text-center font-bold text-white'>GYM Notes</h1>
