@@ -31,18 +31,18 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-black  min-h-screen h-auto">
+    <div className="bg-white  min-h-screen h-auto">
       <Header />
       <div className="flex flex-col items-center mt-6">
         <div className="flex flex-row w-full">
           <div className="flex justify-start ml-4 z-0">
             <button className="z-30" onClick={agregarMarco}>
-              <IoAddCircleSharp color="white" size={32} />
+              <IoAddCircleSharp color="black" size={32} />
             </button>
           </div>
           <div className="flex absolute w-full justify-center items-center pointer-events-none">
-            <h1 className="text-4xl text-white text-center font-bold">
-              Workouts:
+            <h1 className="text-4xl text-black text-center font-bold">
+              Workouts: 
             </h1>
           </div>
         </div>
@@ -56,7 +56,7 @@ const Home = () => {
 
         {marcos.length === 0 ? (
           <div className="flex items-center justify-center w-full h-96">
-            <h1 className="text-gray-300 text-xl">
+            <h1 className="text-gray-800 text-xl">
               You will see your Workouts here when you create them...
             </h1>
           </div>

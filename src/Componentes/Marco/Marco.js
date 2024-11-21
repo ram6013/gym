@@ -6,6 +6,8 @@ import Ejercicios from "./Ejercicios";
 import { RiExpandDiagonalFill } from "react-icons/ri";
 import { GrContract } from "react-icons/gr";
 import { useOutsideClick } from "../../hooks/UseOutsideClick";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const NewClassName =
   "fixed inset-0 z-50 col-span-4 border p-4 rounded-lg shadow-md grid grid-rows-[auto,auto,1fr,auto] ";
@@ -77,20 +79,20 @@ const Marco = ({
   setModifyMarco,
 }) => {
   const cantidadEjercicios = parseInt(ejercicios) || 0;
-  const camposTexto = new Array(cantidadEjercicios).fill("");
 
-  const [isAdd, setIsAdd] = useState(true);
+  const [TurnMarco, setTurnMarco] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
-  const objectRef = useRef(colors.blanco);
   const containerRef = useRef(null);
 
   const [color, setColor] = useState(colors.blanco);
 
+  const navigate = useNavigate();
+
   useOutsideClick(containerRef, () => setModifyMarco(false));
 
   const toggleIcon = () => {
-    setIsAdd(!isAdd);
+    setTurnMarco(!TurnMarco);
   };
 
   const closeModal = () => setShowModal(false);
@@ -104,6 +106,22 @@ const Marco = ({
     setModifyMarco(!modifyMarco);
   };
 
+  const data = {
+    "id":id,
+    "texto":nombreRutina,
+    "color": color.color
+  };
+
+  const SendToCalendar = () => {
+    try {
+      navigate("/calendar", { state: { data } });
+      toast("Routine sent to calendar successfully!", { duration: 3000, icon:"😙" });
+    } catch (error) {
+      console.error(error);
+      toast("Failed to send routine to calendar.", { duration: 3000, icon:"😢" });
+    }
+  };
+  
   return (
     <div
       className={
@@ -115,7 +133,7 @@ const Marco = ({
     >
       <header className="flex w-full justify-between">
         <button onClick={toggleIcon} className="text-4xl">
-          {isAdd ? (
+          {TurnMarco ? (
             <FaMinus color={color.icon} size={25} />
           ) : (
             <FaPlus color={color.icon} size={25} />
@@ -140,8 +158,14 @@ const Marco = ({
       <hr className="mt-3"></hr>
 
       <div className="mt-4">
-        {isAdd && (
+        {TurnMarco ? (
           <Ejercicios colors={color} cantidadEjercicios={cantidadEjercicios} />
+        ) : (
+          <div className="flex justify-center">
+            <button onClick={SendToCalendar} className="text-white border-2 bg-black  rounded-lg p-2">
+              Send to calendar
+            </button>
+          </div>
         )}
       </div>
       {showModal && (

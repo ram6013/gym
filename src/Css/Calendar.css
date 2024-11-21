@@ -1,0 +1,22 @@
+.month_default_event {
+    overflow: hidden;
+    border-radius: 15px;
+}
+.month_default_event_inner {
+    background: #636363;
+    border-color: #777777;
+    color: #fff;
+    padding-left: 35px;
+    border-radius: 15px;
+}
+
+.month_default_event_bar {
+    left: 0px;
+    width: 30px;
+
+}
+.month_default_event_bar_inner {
+    background: #888888;
+    border-radius: 15px;
+    width: 30px;
+}
