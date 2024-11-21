@@ -121,7 +121,12 @@ const Marco = ({
       toast("Failed to send routine to calendar.", { duration: 3000, icon:"😢" });
     }
   };
-  
+  // window.localStorage.setItem("marcos", JSON.stringify( [
+  //   { id: id, nombreRutina: nombreRutina, ejercicios: ejercicios },
+  // ]));
+
+  console.log(window.localStorage.getItem("marcos"));
+  window.localStorage.removeItem("marcos"); 
   return (
     <div
       className={
@@ -162,7 +167,10 @@ const Marco = ({
           <Ejercicios colors={color} cantidadEjercicios={cantidadEjercicios} />
         ) : (
           <div className="flex justify-center">
-            <button onClick={SendToCalendar} className="text-white border-2 bg-black  rounded-lg p-2">
+            <button
+              onClick={SendToCalendar}
+              className="text-white border-2 bg-black  rounded-lg p-2"
+            >
               Send to calendar
             </button>
           </div>
